@@ -51,4 +51,28 @@ function myFunction(item, index) {
   }
 }
 
+
+// map_methods
+let employee=[{name:"david",age:42},
+{name:"raj",age:32},
+{name:"arjun",age:52},
+{name:"vickram",age:22}]
+
+let overview=employee.map(function(data){
+  return data.name
+})
+console.log("overview: ", overview);
+
+// filter_methods
+
+const randomNumbers = [4, 11, 42, 14, 39];
+const filteredArray = randomNumbers.filter(n => {  
+  return n;
+});
+console.log("filteredArray: ", filteredArray);
+
+
+
+
+
     
