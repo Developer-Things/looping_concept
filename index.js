@@ -71,8 +71,15 @@ const filteredArray = randomNumbers.filter(n => {
 });
 console.log("filteredArray: ", filteredArray);
 
+for loop last iteration get
+ const data = [1, 2, 3];
+    let iterations = data.length;
 
-
+    for (let item of data) {
+      if (!--iterations)
+        console.log(item + " => This is the last iteration...");
+      else console.log(item);
+    }
 
 
     
