@@ -74,10 +74,11 @@ console.log("filteredArray: ", filteredArray);
 for loop last iteration get
  const data = [1, 2, 3];
     let iterations = data.length;
-
+    let list
     for (let item of data) {
       if (!--iterations)
         console.log(item + " => This is the last iteration...");
+        list =item
       else console.log(item);
     }
 
