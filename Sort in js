@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+
+<html>  
+
+    <head>  
+
+        <title>  
+
+            JavaScript | Sort Object Array By Date.  
+
+        </title>  
+
+    </head> 
+
+      
+
+    <body style = "text-align:center;">  
+
+          
+
+        <h1 style = "color:green;" >  
+
+            GeeksForGeeks  
+
+        </h1>  
+
+          
+
+        <button onclick = "geeks_outer()">  
+
+            Click To Sort 
+
+        </button>  
+
+          
+
+        <p id = "GFG_P" style = "color:green;"></p> 
+
+          
+
+        <!-- Script to sort array of object by date -->
+
+        <script>  
+
+            var array = [{id: "1", date: "Mar 12 2012 10:00:00 AM"}, 
+
+                        {id: "2", date: "Mar 8 2012 08:00:00 AM"}]; 
+
+              
+
+            var el = document.getElementById("GFG_P"); 
+
+          
+
+            function geeks_outer() { 
+
+                array.sort(GFG_sortFunction); 
+
+                el.innerHTML = JSON.stringify(array); 
+
+            } 
+
+              
+
+            function GFG_sortFunction(a, b) {  
+
+                var dateA = new Date(a.date).getTime(); 
+
+                var dateB = new Date(b.date).getTime(); 
+
+                return dateA > dateB ? 1 : -1;  
+
+            };  
+
+        </script>  
+
+    </body>  
+
+</html>     
