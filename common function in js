@@ -1,0 +1,139 @@
+
+async function orderWiseListCurrency() {
+  var mainCurrency = {};
+  let baseCurrency = await currencyList.find({ apiPath: { $ne: "default" } });
+  let arr = ["c01", "c04", "c05", "c03", "c06", "c02",];
+  //"c07" alternative own token
+  //BNB/BUSD/USDT/ETH/USDC/BTC
+  baseCurrency.find((element) => {
+    arr.map((setCurrency, index) => {
+      // check Main currency
+      if (index == 0 && arr[index] == element.contractAddress) {
+        mainCurrency.firstTopCurrency = element
+      }
+
+      else if (index == 1 && arr[index] == element.contractAddress) {
+        mainCurrency.secondTopCurrency = element
+      }
+
+      else if (index == 2 && arr[index] == element.contractAddress) {
+        mainCurrency.thirdTopCurrency = element
+      }
+
+      else if (index == 3 && arr[index] == element.contractAddress) {
+        mainCurrency.fourthTopCurrency = element
+      }
+
+      else if (index == 4 && arr[index] == element.contractAddress) {
+        mainCurrency.fifthTopCurrency = element
+      }
+
+      else if (index == 5 && arr[index] == element.contractAddress) {
+        mainCurrency.sixthTopCurrency = element
+      }
+    });
+  });
+  return mainCurrency
+}
+
+
+async function topTokenList() {
+  var pairsData
+  var updateCoinprice
+  let baseCurrency = await currencyList.find({ apiPath: { $ne: "default" } });
+  let topTokenListData = await orderWiseListCurrency()
+
+  baseCurrency.map(async (element) => {
+    let Result = await pairsList.find({
+      $or: [{ fromTokenAddress: element.contractAddress },
+      { toTokenAddress: element.contractAddress }]
+    })
+    Result.find((getUsdParis) => {
+      pairsData = getUsdParis
+    })
+
+    if (Result) {  //pending 
+      if (topTokenListData.firstTopCurrency.contractAddress === pairsData.fromTokenAddress) {
+        updateCoinprice = topTokenListData.firstTopCurrency.defaultUsd
+
+      }
+      else if (topTokenListData.firstTopCurrency.contractAddress === pairsData.toTokenAddress) {
+
+      }
+    }
+    const result = await currencyList.updateOne({ currencyUSD: updateCoinprice });
+
+  })
+}
+topTokenList()
+
+
+
+async function filterCurrency() {
+  let baseCurrency = await currencyList.find({ apiPath: { $ne: "default" } });
+  sortList(baseCurrency, "ASC", "defaultUsd")
+  function sortList(list, type, field) {
+    if (type === "DESC") {
+      list.sort((a, b) => {
+        if (field === "currencyName") {
+          if (a.currencyName > b.currencyName)
+            return 1
+        }
+        if (field === "currencySymbol") {
+          if (a.currencySymbol > b.currencySymbol)
+            return 1
+        }
+
+        if (field === "contractAddress") {
+          if (a.contractAddress > b.contractAddress) {
+            return 1
+          }
+        }
+        if (field === "apiPath") {
+          if (a.apiPath > b.apiPath) {
+            return 1
+          }
+        }
+        if (field === "defaultUsd") {
+          if (a.defaultUsd > b.defaultUsd) {
+            return 1
+          }
+        }
+
+      })
+    }
+    else if (type === "ASC") {
+      list.sort((a, b) => {
+        if (field === "currencyName") {
+          if (a.currencyName < b.currencyName)
+            return -1
+        }
+        if (field === "currencySymbol") {
+          if (a.currencySymbol < b.currencySymbol)
+            return -1
+        }
+
+        if (field === "contractAddress") {
+          if (a.contractAddress < b.contractAddress)
+            return -1
+        }
+        if (field === "apiPath") {
+          if (a.apiPath < b.apiPath)
+            return -1
+        }
+        if (field === "defaultUsd") {
+          if (a.defaultUsd < b.defaultUsd)
+          return -1
+        }
+      })
+    }
+
+  }
+  console.log("listlistlistlistlistlist0", baseCurrency);
+}
+filterCurrency()
+
+
+
+
+
