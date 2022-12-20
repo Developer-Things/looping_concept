@@ -1,0 +1,13 @@
+
+async function currencydata() {
+  let List = await currencyList.find().sort({ sortId: -1 })
+  let sortId
+  if (List.length === 0) {
+    sortId = 1
+  }
+  else {
+    sortId = List[0].sortId + 1
+  }
+  console.log("sortIdsortId", sortId);
+}
+currencydata()
