@@ -1,0 +1,20 @@
+1.cltr +shift +p
+2.select=>snipet configure user snippet
+3.javascript.json
+add this code
+"Print to console": {
+		"prefix": "myLog",
+		"body": [
+			"console.log('-------------------------->$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	},
+	"Print to consoles": {
+		"prefix": "myLog1",
+		"body": [
+			"console.log('+++++++++++++++++>$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	}
