@@ -1,0 +1,26 @@
+overviewflow
+
+1.FIRST FLOW
+bnb = 250   
+1.three type flow=>frombase or tobase check and update /frombase and tobase direct return /  both are not match  that time 
+
+eg:wtn-Atoken   
+
+
+1.bnb =base bnb
+  wtn =base bnb
+
+2.eth=base eth
+  wtn=base eth 
+findone wtn which currency basetoken 
+2.bnb 10 wtn =0.1 * 250  =25 WTN USD   =>BASETOKENADDRESS STORE =>BNB ADDRESS
+3.coingecko value change => calculateamt * usdamount update in other token  
+4.getreserve flow
+
+
+
+2.SECOND FLOW 
+1.
+
+
+
