@@ -135,8 +135,18 @@ filterCurrency()
 
 removeDuplicate array of object
 
-async function duplicate(){
-  var obj=[{
+async function duplicate() {
+  var obj = [{
+    "currencyName": "BNB",
+    "currencySymbol": "Binancechain",
+    "contractAddress": "c01",
+    "apiPath": "Binancechain",
+    "defaultUsd": 300,
+    "__v": 0,
+    "currencyUSD": 300,
+    "sortId": 1
+  },
+  {
     "currencyName": "BNB",
     "currencySymbol": "Binancechain",
     "contractAddress": "c01",
@@ -145,17 +155,11 @@ async function duplicate(){
     "__v": 0,
     "currencyUSD": 200,
     "sortId": 1
-  },
-  {
-    "currencyName": "BNB",
-    "currencySymbol": "Binancechain",
-    "contractAddress": "c01",
-    "apiPath": "Binancechain",  
-    "defaultUsd": 200,
-    "__v": 0,
-    "currencyUSD": 200,
-    "sortId": 1
   }]
+
+  let sort = await sortData(obj, "currencyUsd", "DESC");
+
+  console.log("sort: ", sort);
   let getUniqueData=await getUniqueListBy(obj ,"apiPath")
   console.log("getUniqueData: ", getUniqueData);
 }
@@ -164,6 +168,18 @@ function getUniqueListBy(arr, key) {
   return [...new Map(arr.map(item => [item[key], item])).values()]
 }
 
+async function sortData(obj, key, type) {
+  return obj.sort((a, b) => {
+    if (type === "ASC") {
+      console.log('--------------------------> sample 1');
+      return -1; //ascending 
+    }
+    else if (type === "DESC") {
+      return 1; //decending 
+    }
+    return 0;
+  });
+}
 
 
 
