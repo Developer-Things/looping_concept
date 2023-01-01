@@ -133,6 +133,36 @@ async function filterCurrency() {
 }
 filterCurrency()
 
+removeDuplicate array of object
+
+async function duplicate(){
+  var obj=[{
+    "currencyName": "BNB",
+    "currencySymbol": "Binancechain",
+    "contractAddress": "c01",
+    "apiPath": "Binancechain",
+    "defaultUsd": 200,
+    "__v": 0,
+    "currencyUSD": 200,
+    "sortId": 1
+  },
+  {
+    "currencyName": "BNB",
+    "currencySymbol": "Binancechain",
+    "contractAddress": "c01",
+    "apiPath": "Binancechain",  
+    "defaultUsd": 200,
+    "__v": 0,
+    "currencyUSD": 200,
+    "sortId": 1
+  }]
+  let getUniqueData=await getUniqueListBy(obj ,"apiPath")
+  console.log("getUniqueData: ", getUniqueData);
+}
+duplicate()
+function getUniqueListBy(arr, key) {
+  return [...new Map(arr.map(item => [item[key], item])).values()]
+}
 
 
 
