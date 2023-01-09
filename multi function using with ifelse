@@ -1,0 +1,103 @@
+
+cron.schedule('* * * * *', async () => {
+  console.log('running a task every minute');
+  setTimeout(async () => {
+    let updateCronList = await updateTradeData("cron")
+  }, 1000);
+});
+
+
+
+
+// async function updateLiquidityData(values, type) {
+//   let isType = type
+//   let tokenAddress = values.tokenAddress
+//   let updateLiquidityList = await liquidityexp.updateOne({ tokenAddress: tokenAddress, isType: isType })
+//   console.log("updateLiquidityList: ", updateLiquidityList);
+// }
+
+// async function updateSwapList(values, type) {
+//   let isType = type
+//   let tokenAddress = values.tokenAddress
+//   let totalLiquidity = values.totalLiquidity
+//   let updateLiquidityList = await liquidityexp.updateOne({ tokenAddress: tokenAddress,
+//      totalLiquidity: totalLiquidity, isType: isType })
+//   console.log("updateLiquidityList: ", updateLiquidityList);
+// }
+function functionOne() {
+  console.log("functionOne");
+}
+function functionTwo() {
+  console.log("functionTwo");
+}
+function functionThree() {
+  console.log("functionThree");
+}
+async function updateTradeData(values, type) {
+  var isType = type
+  var tokenAddress = values.tokenAddress
+  var totalLiquidity = values.totalLiquidity
+  if (type == "liquidity") {
+    let updateLiquidityList = await liquidityexp.updateOne({ tokenAddress: tokenAddress, isType: isType })
+    console.log("updateLiquidityList: ", updateLiquidityList);
+    type == "liquidity" === await (functionOne(), functionTwo() ,functionThree()) 
+
+  } 
+  else if (type == "swap") {
+    let isType = type
+    let updateSwapList = await liquidityexp.updateOne({
+      tokenAddress: tokenAddress,
+      totalLiquidity: totalLiquidity, isType: isType
+    })
+    console.log("updateSwapList: ", updateSwapList);
+  }
+}
+
+
+// async function typeBaseTrade(data, isType) {
+//   if (isType == "liquidity") {
+//     console.log("liquidity: ");
+//     let updateLiqudityListData = await updateLiquidityData(data, isType)
+//   }
+//   else if (isType == "swap") {
+//     let updateSwapListDetails = await updateSwapList(data, isType)
+//     console.log("swap: ",);
+//   }
+//   else if (isType == "remove") {
+//     console.log("remove: ",);
+//   }
+//   else if (isType == "cron") {
+//     console.log("cron: ",);
+//   }
+//   else if (isType == "reserveValue") {
+//     console.log("reserveValue: ",);
+//   }
+// }
+
+exports.liquidity = async (req, res) => {
+  let values = req.body
+  console.log("values: ", values);
+  let createliquidity = await liquidityexp.create(values)
+  if (createliquidity) {
+    res.json({ status: true, message: "Success!", data: values })
+    let tradeUpdateDetails = await updateTradeData(values, "liquidity")
+  } else {
+    res.json({ status: false, message: "No data found!", data: [] })
+  }
+}
+
+exports.swap = async (req, res) => {
+  let values = req.body
+  let swap = await liquidityexp.findOneAndUpdate({ tokenAddress: values.tokenAddress }, { totalLiquidity: values.totalLiquidity })
+  if (swap) {
+    res.json({ status: true, message: "Success!", data: values })
+    let tradeUpdateDetails = await updateTradeData(values, "swap")
+  } else {
+    res.json({ status: false, message: "No data found!", data: [] })
+  }
+}
+
+exports.remove = async (req, res) => {
+
+
+}
