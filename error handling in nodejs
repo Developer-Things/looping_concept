@@ -1,20 +1,15 @@
+
 async function doThings(input) {
-    try {
-        validate(input);
-        try {
-            await db.create(input);
-        } catch (error) {
-            error.message = `Inner error: ${error.message}`
-
-            if (error instanceof Klass) {
-                error.isKlass = true;
-            }
-
-            throw error
-        }
-    } catch (error) {
-        error.message = `Could not do things: ${error.message}`;
-        await rollback(input);
-        throw error;
-    }
+  try {
+      try {
+          await db.create(input);
+      } catch (error) {
+          error.message = `Inner error: ${error.message}`
+          throw error
+      }
+  } catch (error) {
+      error.message = `Could not do things: ${error.message}`;
+      throw error;
+  }
 }
+doThings("dsfs")
