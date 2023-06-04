@@ -1,0 +1,15 @@
+const chars = ['A', 'B', 'C'];
+const data = [
+  {'item':'A', 'rank': '1'},
+  {'item':'B', 'rank': '2'},
+  {'item':'C', 'rank': '3'}
+];
+
+const filteredData = [];
+for (const c of chars) {
+  for (const d of data) {
+    if (d.item === c) {
+      filteredData.push(d);
+    }
+  }
+}
