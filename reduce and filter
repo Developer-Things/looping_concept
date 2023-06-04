@@ -1,0 +1,16 @@
+const chars = ['A', 'B', 'd'];
+const data = [
+  {'item':'A', 'rank': '1'},
+  {'item':'B', 'rank': '2'},
+  {'item':'C', 'rank': '3'}
+];
+
+const filteredData = chars.reduce((acc, c) => {
+  const filtered = data.filter(d => (d.item === c ));
+  
+  return [...acc, ...filtered];
+}, []);
+
+
+
+console.log("filteredData >>>>>>" ,filteredData)
